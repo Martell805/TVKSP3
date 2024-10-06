@@ -1,0 +1,16 @@
+FROM ubuntu:20.04
+LABEL maintainer="your_email@example.com"
+LABEL version="1.0"
+LABEL description="This is a sample Dockerfile that uses all the requested commands."
+ENV APP_HOME=/usr/src/app
+ENV LOG_DIR=/var/log/myapp
+WORKDIR $APP_HOME
+COPY . $APP_HOME
+ADD https://example.com/sample.tar.gz /usr/src/sample/
+RUN apt-get update && apt-get install -y curl
+EXPOSE 8080
+VOLUME ["/data"]
+CMD ["echo", "This is the default command."]
+ENTRYPOINT ["/bin/bash"]
+USER root
+ONBUILD RUN echo "This is executed during future builds."
